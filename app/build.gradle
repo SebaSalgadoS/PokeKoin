@@ -2,11 +2,12 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
     namespace 'com.sebasalgado.pokekoin'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.sebasalgado.pokekoin"
@@ -31,15 +32,30 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
     def lifecycle_version = "2.5.1"
     def nav_version = "2.3.0"
     def fragment_version = "1.5.5"
+    def koin_version = "3.3.3"
+    def koin_android_version = "3.3.3"
 
     //Koin
-    implementation 'org.koin:koin-android:3.1.2'
+    implementation "io.insert-koin:koin-core:$koin_version"
+
+    // Android Koin
+    implementation "io.insert-koin:koin-android:$koin_android_version"
+    // Java Compatibility
+    implementation "io.insert-koin:koin-android-compat:$koin_android_version"
+    // Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
+    // Navigation Graph
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_android_version"
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -66,7 +82,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.4.1"
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
